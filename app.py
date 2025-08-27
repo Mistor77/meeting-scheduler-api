@@ -51,10 +51,11 @@ def calculate():
     if result is None:
         return jsonify({'error': 'No valid time found'}), 400
     total_score, utc_hour, details = result
+    details_str = "; ".join([f"{name}: {info['local_time']}, Score {info['score']}" for name, info in details.items()])
     return jsonify({
         'best_utc': utc_hour,
         'total_score': total_score,
-        'details': details
+        'details': details_str
     })
 
 if __name__ == '__main__':
